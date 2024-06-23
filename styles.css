@@ -1,0 +1,57 @@
+body {
+  font-family: sans-serif;
+  background: rgb(238, 174, 202);
+  background: -moz-radial-gradient(circle, rgba(238, 174, 202, 1) 0%, rgba(166, 148, 233, 1) 95%);
+  background: -webkit-radial-gradient(circle, rgba(238, 174, 202, 1) 0%, rgba(166, 148, 233, 1) 95%);
+  background: radial-gradient(circle, rgba(238, 174, 202, 1) 0%, rgba(166, 148, 233, 1) 95%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#eeaeca", endColorstr="#a694e9", GradientType=1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+form {
+  margin-top: 1vh;
+  margin-bottom: 20px;
+  width: 100%;
+  max-width: 500px;
+  box-sizing: border-box;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  background-color: rgba(240, 255, 255, 0.39);
+  border: none;
+  border-radius: 10px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+#posts {
+  width: 100%;
+  max-width: 500px;
+  box-sizing: border-box;
+}
+
+#posts div {
+  margin-top: 10px;
+  padding: 2px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.options {
+  display: flex;
+  align-items: center;
+}
+
+.options i {
+  margin-left: 10px;
+  cursor: pointer;
+}
