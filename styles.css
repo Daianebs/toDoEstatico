@@ -46,6 +46,11 @@ input {
   box-sizing: border-box;
 }
 
+#posts div p {
+  word-break: break-word; /* Quebra de linha automática */
+  overflow-wrap: break-word; /* Fallback para navegadores antigos */
+}
+
 .options {
   display: flex;
   align-items: center;
