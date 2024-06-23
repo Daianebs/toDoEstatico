@@ -1,9 +1,21 @@
 body {
   font-family: sans-serif;
   background: rgb(238, 174, 202);
-  background: -moz-radial-gradient(circle, rgba(238, 174, 202, 1) 0%, rgba(166, 148, 233, 1) 95%);
-  background: -webkit-radial-gradient(circle, rgba(238, 174, 202, 1) 0%, rgba(166, 148, 233, 1) 95%);
-  background: radial-gradient(circle, rgba(238, 174, 202, 1) 0%, rgba(166, 148, 233, 1) 95%);
+  background: -moz-radial-gradient(
+    circle,
+    rgba(238, 174, 202, 1) 0%,
+    rgba(166, 148, 233, 1) 95%
+  );
+  background: -webkit-radial-gradient(
+    circle,
+    rgba(238, 174, 202, 1) 0%,
+    rgba(166, 148, 233, 1) 95%
+  );
+  background: radial-gradient(
+    circle,
+    rgba(238, 174, 202, 1) 0%,
+    rgba(166, 148, 233, 1) 95%
+  );
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#eeaeca", endColorstr="#a694e9", GradientType=1);
   display: flex;
   flex-direction: column;
@@ -29,13 +41,13 @@ input {
   box-sizing: border-box;
 }
 
-#posts {
+#blocosTarefas {
   width: 100%;
   max-width: 500px;
   box-sizing: border-box;
 }
 
-#posts div {
+#blocosTarefas div {
   margin-top: 10px;
   padding: 2px;
   border: 1px solid #ccc;
@@ -46,10 +58,11 @@ input {
   box-sizing: border-box;
 }
 
-#posts div p {
+#blocosTarefas div p {
   word-break: break-word; /* Quebra de linha automática */
   overflow-wrap: break-word; /* Fallback para navegadores antigos */
 }
+
 
 .options {
   display: flex;

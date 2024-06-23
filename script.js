@@ -1,53 +1,54 @@
-// script.js
 let form = document.getElementById("form");
 let input = document.getElementById("input");
 let msgErro = document.getElementById("msgErro");
-let posts = document.getElementById("posts");
+let blocosDeTarefas = document.getElementById("blocosTarefas");
 
 form.addEventListener("submit", (event) => {
-  event.preventDefault();
-  console.log("Botão clicado!");
+  event.preventDefault(); // Previnindo o comportamento padrão do formulário
   validarFormulario();
 });
 
 let validarFormulario = () => {
   if (input.value === "") {
     msgErro.innerHTML = "Por favor, preencha o campo";
-    console.log("Dados não foram aceitos, campo vazio.");
-    
   } else {
-    console.log("Muito bem, dados aceitos.");
     msgErro.innerHTML = "";
     aceitarDados();
   }
 };
-
+//Cria objeto dados
 let dados = {};
 
 let aceitarDados = () => {
-  dados["Entrada de Texto"] = input.value;
+  dados["Tarefa"] = input.value;
   console.log(dados);
-  criarPost();
+  criarBlocoDeTarefa();
 };
 
-let criarPost = () => {
-  posts.innerHTML += `
+let criarBlocoDeTarefa = () => {
+  blocosTarefas.innerHTML += `
     <div>
-        <p>${dados["Entrada de Texto"]}</p>
+        <p>${dados["Tarefa"]}</p>
         <span class="options">
-            <i onClick="editarPost(this)" class="fas fa-edit"></i>
-            <i onClick="deletarPost(this)" class="fas fa-trash-alt"></i>
+            <i onClick="editarTarefa(this)" class="fas fa-edit"></i> 
+            <i onClick="deletarTarefa(this)" class="fas fa-trash-alt"></i>
         </span>
     </div>
   `;
-  input.value = "";
+  input.value = ""; //após criar a tarefa, limpa o input
 };
 
-let deletarPost = (event) => {
-  event.parentElement.parentElement.remove();
-};
-
-let editarPost = (event) => {
+let editarTarefa = (event) => {
   input.value = event.parentElement.previousElementSibling.innerHTML;
+  // input.value: permite modificar o valor da tarefa que o usuário clicar, 'event' captura o clique no ícone.
+  // .parentElement: acessa o <span class="options"> que contém os ícones.
+  // previousElementSibling: acessa o elemento irmão acima, o <p> que contém o texto da tarefa.
+  // innerHTML: obtém o conteúdo HTML dentro desse <p>, ou seja, o texto da tarefa, e atribui ao input.value.
+
+  event.parentElement.parentElement.remove(); // Remove o elemento pai do span.options, que é o div contendo a tarefa.
+};
+
+let deletarTarefa = (event) => {
   event.parentElement.parentElement.remove();
+  // o parent do botão deletar é o span com a classe options. E o parent do span é a div; Assim remove o <div> contendo a tarefa inteira do DOM.
 };
