@@ -1,83 +1,92 @@
-let form = document.getElementById("form");
-let input = document.getElementById("input");
-let msgErro = document.getElementById("msgErro");
-let blocosDeTarefas = document.getElementById("blocosTarefas");
+const form = document.getElementById("form");
+const input = document.getElementById("input");
+const msgErro = document.getElementById("msgErro");
+const blocosDeTarefas = document.getElementById("blocosTarefas");
 
 // Carregar tarefas salvas no localStorage ao iniciar a página
 document.addEventListener("DOMContentLoaded", () => {
   const tarefasSalvas = JSON.parse(localStorage.getItem("minhasTarefas")) || [];
   tarefasSalvas.forEach((tarefa) => {
-    blocosTarefas.innerHTML += `
-      <div>
-          <p>${tarefa}</p>
-          <span class="options">
-              <i onClick="editarTarefa(this)" class="fas fa-edit"></i> 
-              <i onClick="deletarTarefa(this)" class="fas fa-trash-alt"></i>
-          </span>
-      </div>
-    `;
+    criarBlocoDeTarefa(tarefa);
   });
 });
 
+// Previnindo o comportamento padrão do formulário
 form.addEventListener("submit", (event) => {
-  event.preventDefault(); // Previnindo o comportamento padrão do formulário
+  event.preventDefault();
   validarFormulario();
 });
 
-let validarFormulario = () => {
-  if (input.value === "") {
+// Função para validar o formulário
+const validarFormulario = () => {
+  if (input.value.trim() === "") {
     msgErro.textContent = "Por favor, preencha o campo";
   } else {
-    msgErro.textContent  = "";
+    msgErro.textContent = "";
     aceitarDados();
   }
 };
-let aceitarDados = () => {
-  let tarefaDoInput = input.value.trim(); // trim Remove espaços em branco extras
+
+// Função para aceitar e processar os dados do formulário
+const aceitarDados = () => {
+  const tarefaDoInput = input.value.trim();
   salvarTarefaLocalStorage(tarefaDoInput);
   criarBlocoDeTarefa(tarefaDoInput);
-  input.value = ""; // Após criar a tarefa, limpar o input
+  input.value = "";
 };
 
-let salvarTarefaLocalStorage = (tarefaDoInput) => {
-  let tarefasSalvas = JSON.parse(localStorage.getItem("minhasTarefas")) || [];
+// Função para salvar tarefa no localStorage
+const salvarTarefaLocalStorage = (tarefaDoInput) => {
+  const tarefasSalvas = JSON.parse(localStorage.getItem("minhasTarefas")) || [];
   tarefasSalvas.push(tarefaDoInput);
   localStorage.setItem("minhasTarefas", JSON.stringify(tarefasSalvas));
 };
 
-let criarBlocoDeTarefa = (tarefa) => {
-  blocosTarefas.innerHTML += `
-    <div>
-        <p>${tarefa}</p>
-        <span class="options">
-            <i onClick="editarTarefa(this)" class="fas fa-edit"></i> 
-            <i onClick="deletarTarefa(this)" class="fas fa-trash-alt"></i>
-        </span>
-    </div>
-  `;
-};
-let editarTarefa = (event) => {
-  input.value = event.parentElement.previousElementSibling.innerHTML.trim();
-  // input.value: permite modificar o valor da tarefa que o usuário clicar, 'event' captura o clique no ícone.
-  // .parentElement: acessa o <span class="options"> que contém os ícones.
-  // previousElementSibling: acessa o elemento irmão acima, o <p> que contém o texto da tarefa.
-  // innerHTML: obtém o conteúdo HTML dentro desse <p>, ou seja, o texto da tarefa, e atribui ao input.value.
+// Função para criar o bloco de tarefa no DOM
+const criarBlocoDeTarefa = (tarefa) => {
+  const bloco = document.createElement("div");
+  const paragrafo = document.createElement("p");
+  paragrafo.textContent = tarefa;
 
-  let tarefaRemovida = event.parentElement.parentElement.remove(); // Remove o elemento pai do span.options, que é o div contendo a tarefa. 
-  removerTarefaLocalStorage(tarefaRemovida);
-};
+  const span = document.createElement("span");
+  span.classList.add("options");
 
-let deletarTarefa = (event) => {
-  let tarefaRemovida = event.parentElement.parentElement.remove();
-  // o parent do botão deletar é o span com a classe options. E o parent do span é a div; Assim remove o <div> contendo a tarefa inteira do DOM.
-  removerTarefaLocalStorage(tarefaRemovida);
+  const editIcon = document.createElement("i");
+  editIcon.classList.add("fas", "fa-edit");
+  editIcon.addEventListener("click", () => editarTarefa(paragrafo));
+
+  const deleteIcon = document.createElement("i");
+  deleteIcon.classList.add("fas", "fa-trash-alt");
+  deleteIcon.addEventListener("click", () => deletarTarefa(paragrafo));
+
+  span.appendChild(editIcon);
+  span.appendChild(deleteIcon);
+
+  bloco.appendChild(paragrafo);
+  bloco.appendChild(span);
+
+  blocosDeTarefas.appendChild(bloco);
 };
 
-let removerTarefaLocalStorage = (tarefa) => {
-  let tarefasSalvas = JSON.parse(localStorage.getItem("tarefas")) || [];
-  let index = tarefasSalvas.indexOf(tarefa);
+// Função para editar a tarefa
+const editarTarefa = (paragrafo) => {
+  input.value = paragrafo.textContent.trim();
+  removerTarefaLocalStorage(paragrafo.textContent.trim());
+  paragrafo.parentElement.remove();
+};
+
+// Função para deletar a tarefa
+const deletarTarefa = (paragrafo) => {
+  removerTarefaLocalStorage(paragrafo.textContent.trim());
+  paragrafo.parentElement.remove();
+};
+
+// Função para remover tarefa do localStorage
+const removerTarefaLocalStorage = (tarefa) => {
+  const tarefasSalvas = JSON.parse(localStorage.getItem("minhasTarefas")) || [];
+  const index = tarefasSalvas.indexOf(tarefa);
   if (index !== -1) {
     tarefasSalvas.splice(index, 1);
-    localStorage.setItem("tarefas", JSON.stringify(tarefasSalvas));
+    localStorage.setItem("minhasTarefas", JSON.stringify(tarefasSalvas));
   }
 };
