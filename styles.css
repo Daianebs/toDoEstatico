@@ -13,8 +13,8 @@ label {
 }
 body {
   font-family: 'Poppins', sans-serif;
-  background: rgb(238, 174, 202);
-  background: -moz-radial-gradient(
+  background: rgb(170, 147, 255) ;
+  /* background: -moz-radial-gradient(
     circle,
     rgba(238, 174, 202, 1) 0%,
     rgba(166, 148, 233, 1) 95%
@@ -28,7 +28,7 @@ body {
     circle,
     rgba(238, 174, 202, 1) 0%,
     rgba(166, 148, 233, 1) 95%
-  );
+  ); */
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#eeaeca", endColorstr="#a694e9", GradientType=1);
   display: flex;
   flex-direction: column;
