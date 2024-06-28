@@ -1,5 +1,18 @@
+/* Estilizando o indicador de foco para elementos interativos */
+input:focus,
+i:focus {
+  outline: 2px solid #1294ff; /* Adiciona uma borda azul ao redor do elemento focado */
+  outline-offset: 4px; /* Espaçamento entre o outline e o elemento */
+}
+
+/* Estilos para os rótulos */
+label {
+  font-family: 'Poppins', sans-serif;
+  display: block;
+  margin-bottom: 0.5em;
+}
 body {
-  font-family: sans-serif;
+  font-family: 'Poppins', sans-serif;
   background: rgb(238, 174, 202);
   background: -moz-radial-gradient(
     circle,
@@ -39,6 +52,7 @@ input {
   border-radius: 10px;
   outline: none;
   box-sizing: border-box;
+  margin-bottom: 1em;
 }
 
 #blocosTarefas {
@@ -61,15 +75,18 @@ input {
 #blocosTarefas div p {
   word-break: break-word; /* Quebra de linha automática */
   overflow-wrap: break-word; /* Fallback para navegadores antigos */
+  padding-left: 5px;
 }
 
-
+button{
+  border-radius: 20px;
+}
 .options {
   display: flex;
   align-items: center;
 }
 
 .options i {
-  margin-left: 10px;
+  margin-right: 15px;
   cursor: pointer;
 }

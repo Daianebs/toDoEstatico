@@ -45,6 +45,7 @@ const salvarTarefaLocalStorage = (tarefaDoInput) => {
 // Função para criar o bloco de tarefa no DOM
 const criarBlocoDeTarefa = (tarefa) => {
   const bloco = document.createElement("div");
+  bloco.tabIndex = 0; // Torna o bloco focável
   const paragrafo = document.createElement("p");
   paragrafo.textContent = tarefa;
 
@@ -53,11 +54,27 @@ const criarBlocoDeTarefa = (tarefa) => {
 
   const editIcon = document.createElement("i");
   editIcon.classList.add("fas", "fa-edit");
+  editIcon.tabIndex = 0; // Torna o ícone focável
+  editIcon.setAttribute('role', 'button');
+  editIcon.setAttribute('aria-label', 'Editar tarefa');
   editIcon.addEventListener("click", () => editarTarefa(paragrafo));
+  editIcon.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      editarTarefa(paragrafo);
+    }
+  });
 
   const deleteIcon = document.createElement("i");
   deleteIcon.classList.add("fas", "fa-trash-alt");
+  deleteIcon.tabIndex = 0; // Torna o ícone focável
+  deleteIcon.setAttribute('role', 'button');
+  deleteIcon.setAttribute('aria-label', 'Excluir tarefa');
   deleteIcon.addEventListener("click", () => deletarTarefa(paragrafo));
+  deleteIcon.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      deletarTarefa(paragrafo);
+    }
+  });
 
   span.appendChild(editIcon);
   span.appendChild(deleteIcon);

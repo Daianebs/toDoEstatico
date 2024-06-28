@@ -14,9 +14,10 @@
   </head>
   <body>
     <form id="form">
-      <input type="text" id="input" placeholder="Adicione uma tarefa" />
-      <p id="msgErro" style="color: red"></p>
+      <label for="input">Nova Tarefa:</label>
+      <input type="text" id="input" aria-label="Campo para nova tarefa"/>
     </form>
+    <div id="msgErro" role="alert" style="color: red"></div>
     <div id="blocosTarefas"></div>
   </body>
 </html>
